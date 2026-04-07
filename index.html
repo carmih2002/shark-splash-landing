@@ -1258,7 +1258,21 @@
         // Form submission
         function handleSubmit(e) {
             e.preventDefault();
-            document.getElementById('bookingForm').style.display = 'none';
+            const form = document.getElementById('bookingForm');
+            const data = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                date: document.getElementById('date').value,
+                eventType: document.getElementById('eventType').value
+            };
+
+            fetch('https://carmih.app.n8n.cloud/webhook/e7bc8798-d7cd-4262-a5ed-3f9396e881a8', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).catch(() => {});
+
+            form.style.display = 'none';
             document.getElementById('successMsg').style.display = 'block';
         }
 
