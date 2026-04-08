@@ -1081,76 +1081,6 @@
         </div>
     </section>
 
-    <!-- TESTIMONIALS -->
-    <section class="testimonials">
-        <div class="section-title reveal">
-            <h2>מה ההורים אומרים? ⭐</h2>
-            <p>הלקוחות שלנו מספרים</p>
-            <span class="wave"></span>
-        </div>
-        <div class="testimonials-grid">
-            <div class="testimonial reveal">
-                <div class="stars">⭐⭐⭐⭐⭐</div>
-                <p>"הילדים פשוט השתגעו! מעולם לא ראיתי אותם כל כך שמחים ביום הולדת. ההתקנה הייתה מהירה והשירות מצוין."</p>
-                <span class="testimonial-author">– מיכל, אמא ל-3</span>
-            </div>
-            <div class="testimonial reveal">
-                <div class="stars">⭐⭐⭐⭐⭐</div>
-                <p>"הזמנו לסיום שנה של הגן – 20 ילדים על המתנפח ואף אחד לא רצה לצאת! שווה כל שקל."</p>
-                <span class="testimonial-author">– אורן, אבא ליובל</span>
-            </div>
-            <div class="testimonial reveal">
-                <div class="stars">⭐⭐⭐⭐⭐</div>
-                <p>"המתנפח נראה מדהים, הילדים אהבו את הכריש. הכל היה מסודר – הגיעו בזמן, התקינו והוריקו בסוף. מושלם!"</p>
-                <span class="testimonial-author">– דנה, מסיבת קיץ</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- BOOKING FORM -->
-    <section class="booking" id="booking">
-        <div class="form-wrapper reveal">
-            <h2>🎉 הזמינו את הכריש!</h2>
-            <p>מלאו את הפרטים ונחזור אליכם בהקדם לאישור ההזמנה</p>
-            <form id="bookingForm" onsubmit="handleSubmit(event)">
-                <div class="form-group">
-                    <label for="name">שם מלא</label>
-                    <input type="text" id="name" name="name" placeholder="הכניסו את שמכם" required>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="phone">טלפון</label>
-                        <input type="tel" id="phone" name="phone" placeholder="050-0000000" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="date">תאריך האירוע</label>
-                        <input type="date" id="date" name="date" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="eventType">סוג האירוע</label>
-                    <select id="eventType" name="eventType" required>
-                        <option value="" disabled selected>בחרו סוג אירוע</option>
-                        <option value="birthday">🎂 יום הולדת</option>
-                        <option value="school">🎓 סיום שנה / גן</option>
-                        <option value="summer">☀️ מסיבת קיץ</option>
-                        <option value="family">👨‍👩‍👧‍👦 אירוע משפחתי</option>
-                        <option value="other">🎈 אחר</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn-submit">
-                    🦈 שלחו הזמנה
-                </button>
-                <p class="form-note">⏰ <strong>חשוב:</strong> יש להזמין לפחות שבוע מראש | מחיר: ₪200 ליום כולל הכל</p>
-            </form>
-            <div id="successMsg" style="display:none; text-align:center; padding:30px;">
-                <div style="font-size:3rem; margin-bottom:12px;">🎉🦈</div>
-                <h3 style="color: var(--blue-dark); font-family: 'Fredoka One', cursive; font-size:1.5rem;">ההזמנה נשלחה בהצלחה!</h3>
-                <p style="color: var(--text-light); margin-top:8px;">נחזור אליכם בהקדם לאישור. תתכוננו לכיף! 💦</p>
-            </div>
-        </div>
-    </section>
-
     <!-- FAQ -->
     <section class="faq" id="faq">
         <div class="section-title reveal">
@@ -1203,6 +1133,76 @@
                 <div class="faq-answer">
                     <p>בוודאי! אנחנו מגיעים, מתקינים הכל, ובסוף היום חוזרים לפרק. אתם רק צריכים ליהנות 😊</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOOKING FORM -->
+    <section class="booking" id="booking">
+        <div class="form-wrapper reveal">
+            <h2>🎉 הזמינו את הכריש!</h2>
+            <p>מלאו את הפרטים ונחזור אליכם בהקדם לאישור ההזמנה</p>
+            <form id="bookingForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">שם מלא</label>
+                    <input type="text" id="name" name="name" placeholder="הכניסו את שמכם" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">טלפון</label>
+                        <input type="tel" id="phone" name="phone" placeholder="050-0000000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">תאריך האירוע</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="eventType">סוג האירוע</label>
+                    <select id="eventType" name="eventType" required>
+                        <option value="" disabled selected>בחרו סוג אירוע</option>
+                        <option value="birthday">🎂 יום הולדת</option>
+                        <option value="school">🎓 סיום שנה / גן</option>
+                        <option value="summer">☀️ מסיבת קיץ</option>
+                        <option value="family">👨‍👩‍👧‍👦 אירוע משפחתי</option>
+                        <option value="other">🎈 אחר</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-submit">
+                    🦈 שלחו הזמנה
+                </button>
+                <p class="form-note">⏰ <strong>חשוב:</strong> יש להזמין לפחות שבוע מראש | מחיר: ₪200 ליום כולל הכל</p>
+            </form>
+            <div id="successMsg" style="display:none; text-align:center; padding:30px;">
+                <div style="font-size:3rem; margin-bottom:12px;">🎉🦈</div>
+                <h3 style="color: var(--blue-dark); font-family: 'Fredoka One', cursive; font-size:1.5rem;">ההזמנה נשלחה בהצלחה!</h3>
+                <p style="color: var(--text-light); margin-top:8px;">נחזור אליכם בהקדם לאישור. תתכוננו לכיף! 💦</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials">
+        <div class="section-title reveal">
+            <h2>מה ההורים אומרים? ⭐</h2>
+            <p>הלקוחות שלנו מספרים</p>
+            <span class="wave"></span>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial reveal">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>"הילדים פשוט השתגעו! מעולם לא ראיתי אותם כל כך שמחים ביום הולדת. ההתקנה הייתה מהירה והשירות מצוין."</p>
+                <span class="testimonial-author">– מיכל, אמא ל-3</span>
+            </div>
+            <div class="testimonial reveal">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>"הזמנו לסיום שנה של הגן – 20 ילדים על המתנפח ואף אחד לא רצה לצאת! שווה כל שקל."</p>
+                <span class="testimonial-author">– אורן, אבא ליובל</span>
+            </div>
+            <div class="testimonial reveal">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>"המתנפח נראה מדהים, הילדים אהבו את הכריש. הכל היה מסודר – הגיעו בזמן, התקינו והוריקו בסוף. מושלם!"</p>
+                <span class="testimonial-author">– דנה, מסיבת קיץ</span>
             </div>
         </div>
     </section>
