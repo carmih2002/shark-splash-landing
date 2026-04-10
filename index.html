@@ -1282,8 +1282,7 @@
         // Set min date for date picker
         const dateInput = document.getElementById('date');
         const today = new Date();
-        const minDate = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
-        dateInput.min = minDate.toISOString().split('T')[0];
+        dateInput.min = today.toISOString().split('T')[0];
     </script>
 </body>
 </html>
