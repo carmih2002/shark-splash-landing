@@ -1172,7 +1172,9 @@
                         <option value="other">🎈 אחר</option>
                     </select>
                 </div>
-                <button type="submit" class="btn-submit">
+                <!-- Honeypot: hidden from humans, bots will fill this -->
+                <input type="text" name="website" id="website" style="display:none" tabindex="-1" autocomplete="off">
+                <button type="submit" class="btn-submit" id="submitBtn">
                     🦈 שלחו הזמנה
                 </button>
                 <p class="form-note">⏰ <strong>חשוב:</strong> יש להזמין לפחות שבוע מראש | מחיר: ₪200 ליום כולל הכל</p>
@@ -1258,23 +1260,33 @@
         }
 
         // Form submission
+        let lastSubmit = 0;
         function handleSubmit(e) {
             e.preventDefault();
-            const form = document.getElementById('bookingForm');
+
+            // Client-side rate limit: one submission per 30 seconds
+            const now = Date.now();
+            if (now - lastSubmit < 30000) return;
+            lastSubmit = now;
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+
             const data = {
                 name: document.getElementById('name').value,
                 phone: document.getElementById('phone').value,
                 date: document.getElementById('date').value,
-                eventType: document.getElementById('eventType').value
+                eventType: document.getElementById('eventType').value,
+                website: document.getElementById('website').value  // honeypot
             };
 
-            fetch('https://carmih.app.n8n.cloud/webhook/e7bc8798-d7cd-4262-a5ed-3f9396e881a8', {
+            fetch('/api/submit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             }).catch(() => {});
 
-            form.style.display = 'none';
+            document.getElementById('bookingForm').style.display = 'none';
             document.getElementById('formHeader').style.display = 'none';
             document.getElementById('successMsg').style.display = 'block';
         }
