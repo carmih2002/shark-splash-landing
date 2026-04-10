@@ -1142,8 +1142,10 @@
     <!-- BOOKING FORM -->
     <section class="booking" id="booking">
         <div class="form-wrapper reveal">
-            <h2>🎉 הזמינו את הכריש!</h2>
-            <p>מלאו את הפרטים ונחזור אליכם בהקדם לאישור ההזמנה</p>
+            <div id="formHeader">
+                <h2>🎉 הזמינו את הכריש!</h2>
+                <p>מלאו את הפרטים ונחזור אליכם בהקדם לאישור ההזמנה</p>
+            </div>
             <form id="bookingForm" onsubmit="handleSubmit(event)">
                 <div class="form-group">
                     <label for="name">שם מלא</label>
@@ -1273,6 +1275,7 @@
             }).catch(() => {});
 
             form.style.display = 'none';
+            document.getElementById('formHeader').style.display = 'none';
             document.getElementById('successMsg').style.display = 'block';
         }
 
