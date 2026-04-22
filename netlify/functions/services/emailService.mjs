@@ -17,34 +17,40 @@ function buildEmailHtml(booking) {
     const date      = formatDate(booking.date);
     const eventType = EVENT_TYPE_LABELS[booking.eventType] || booking.eventType;
 
-    return `
-<!DOCTYPE html>
+    const row = (label, value, valueColor = '#1a1a2e') => `
+      <tr>
+        <td style="padding:10px 16px;border-bottom:1px solid #eef2f7;color:${valueColor};font-size:15px;">${value}</td>
+        <td style="padding:10px 16px;border-bottom:1px solid #eef2f7;color:#4a5568;font-weight:600;font-size:15px;white-space:nowrap;">${label}</td>
+      </tr>`;
+
+    return `<!DOCTYPE html>
 <html dir="rtl" lang="he">
-<head>
-  <meta charset="UTF-8">
-  <style>
-    body { font-family: Arial, sans-serif; background: #f4f8fc; margin: 0; padding: 24px; direction: rtl; }
-    .card { background: #ffffff; border-radius: 12px; padding: 32px; max-width: 480px;
-            margin: 0 auto; box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-    h2 { color: #0B3C5D; margin: 0 0 24px; font-size: 1.4rem; border-bottom: 2px solid #2DAAE1; padding-bottom: 12px; }
-    .row { display: flex; justify-content: space-between; padding: 10px 0;
-           border-bottom: 1px solid #eef2f7; font-size: 0.97rem; }
-    .label { color: #4a5568; font-weight: 600; }
-    .value { color: #1a1a2e; }
-    .terms { color: #27ae60; font-weight: 700; }
-    .footer { margin-top: 24px; font-size: 0.82rem; color: #a0aec0; text-align: center; }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <h2>🦈 הזמנה חדשה התקבלה</h2>
-    <div class="row"><span class="label">תאריך</span><span class="value">${date}</span></div>
-    <div class="row"><span class="label">שם</span><span class="value">${booking.name}</span></div>
-    <div class="row"><span class="label">מספר טלפון</span><span class="value">${booking.phone}</span></div>
-    <div class="row"><span class="label">סוג האירוע</span><span class="value">${eventType}</span></div>
-    <div class="row"><span class="label">תנאי שימוש</span><span class="value terms">אושר ✓</span></div>
-    <div class="footer">נשלח אוטומטית מ-Shark Splash · ${new Date().toLocaleString('he-IL')}</div>
-  </div>
+<head><meta charset="UTF-8"></head>
+<body style="margin:0;padding:24px;background:#f4f8fc;font-family:Arial,sans-serif;direction:rtl;">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr><td align="center">
+      <table width="480" cellpadding="0" cellspacing="0" border="0"
+             style="background:#fff;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.08);overflow:hidden;">
+        <tr>
+          <td colspan="2" style="padding:24px 16px 16px;border-bottom:2px solid #2DAAE1;">
+            <span style="font-size:1.3rem;font-weight:700;color:#0B3C5D;">🦈 הזמנה חדשה התקבלה</span>
+          </td>
+        </tr>
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+          ${row('תאריך', date)}
+          ${row('שם', booking.name)}
+          ${row('מספר טלפון', booking.phone)}
+          ${row('סוג האירוע', eventType)}
+          ${row('תנאי שימוש', 'אושר ✓', '#27ae60')}
+        </table>
+        <tr>
+          <td colspan="2" style="padding:16px;text-align:center;font-size:12px;color:#a0aec0;">
+            נשלח אוטומטית מ-Shark Splash · ${new Date().toLocaleString('he-IL')}
+          </td>
+        </tr>
+      </table>
+    </td></tr>
+  </table>
 </body>
 </html>`;
 }
