@@ -1387,8 +1387,17 @@
                 console.warn('[NewBackend] Validation failed:', errors);
                 return;
             }
-            // Stage 2: POST to new backend endpoint
-            console.log('[NewBackend] Stage 1 complete – data ready:', data);
+            try {
+                const res = await fetch('/api/booking', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                if (!res.ok) console.error('[NewBackend] Server error:', res.status);
+                else console.log('[NewBackend] Booking submitted successfully');
+            } catch (err) {
+                console.error('[NewBackend] Network error:', err.message);
+            }
         }
 
         // Set min date for date picker
