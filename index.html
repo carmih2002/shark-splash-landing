@@ -994,6 +994,120 @@
                 font-size: 1.7rem;
             }
         }
+
+        /* ========== TABLET (769px – 1024px) ========== */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-inner {
+                gap: 30px;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-inner {
+                gap: 30px;
+            }
+
+            .form-wrapper {
+                padding: 32px;
+            }
+        }
+
+        /* ========== SMALL MOBILE (≤ 480px) ========== */
+        @media (max-width: 480px) {
+            .hero {
+                padding: 100px 16px 60px;
+            }
+
+            .hero h1 {
+                font-size: 1.85rem;
+            }
+
+            .hero-badge {
+                font-size: 0.8rem;
+                padding: 6px 14px;
+            }
+
+            .hero-price {
+                flex-wrap: wrap;
+                justify-content: center;
+                font-size: 0.95rem;
+                gap: 6px;
+            }
+
+            .hero-price .amount {
+                font-size: 1.7rem;
+            }
+
+            .hero-cta {
+                font-size: 1rem;
+                padding: 14px 24px;
+                width: 100%;
+                justify-content: center;
+                box-sizing: border-box;
+            }
+
+            .hero-image img {
+                max-width: 95%;
+            }
+
+            .about-image img {
+                height: 240px;
+            }
+
+            .form-wrapper {
+                padding: 24px 16px;
+                border-radius: 16px;
+            }
+
+            .form-wrapper h2 {
+                font-size: 1.5rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .about-list li {
+                font-size: 0.9rem;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-question {
+                font-size: 0.95rem;
+                padding: 16px 18px;
+            }
+
+            .faq-answer p {
+                padding: 0 18px 16px;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                gap: 12px;
+                justify-content: center;
+            }
+
+            .floating-cta {
+                width: 52px;
+                height: 52px;
+                font-size: 1.4rem;
+                bottom: 16px;
+                left: 16px;
+            }
+        }
     </style>
 </head>
 <body>
