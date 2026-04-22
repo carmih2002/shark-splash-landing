@@ -1,5 +1,13 @@
 import { google } from 'googleapis';
 
+const EVENT_TYPE_LABELS = {
+    birthday: 'יום הולדת',
+    school:   'סיום שנה / גן',
+    summer:   'מסיבת קיץ',
+    family:   'אירוע משפחתי',
+    other:    'אחר'
+};
+
 export async function createCalendarEvent(booking) {
     const serviceEmail = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
     const privateKey   = process.env.GOOGLE_PRIVATE_KEY;
@@ -19,6 +27,8 @@ export async function createCalendarEvent(booking) {
 
     const calendar = google.calendar({ version: 'v3', auth });
 
+    const eventType = EVENT_TYPE_LABELS[booking.eventType] || booking.eventType;
+
     await calendar.events.insert({
         calendarId,
         requestBody: {
@@ -28,7 +38,7 @@ export async function createCalendarEvent(booking) {
             description: [
                 `שם: ${booking.name}`,
                 `טלפון: ${booking.phone}`,
-                `סוג אירוע: ${booking.eventType}`,
+                `סוג אירוע: ${eventType}`,
             ].join('\n')
         }
     });
