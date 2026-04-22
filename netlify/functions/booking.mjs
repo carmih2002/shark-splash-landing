@@ -28,7 +28,7 @@ function validatePayload(data) {
             errors.push('התאריך חייב להיות עתידי');
     }
 
-    const allowedEventTypes = ['birthday', 'schoolend', 'neighborhood', 'other'];
+    const allowedEventTypes = ['birthday', 'school', 'summer', 'family', 'other'];
     if (!data.eventType || !allowedEventTypes.includes(data.eventType))
         errors.push('סוג אירוע לא תקין');
 
