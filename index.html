@@ -1305,14 +1305,11 @@
             if (!wasActive) item.classList.add('active');
         }
 
-        // Form submission
+        // ── EXISTING FLOW (n8n via Netlify) – unchanged ──────────────────
         let lastSubmit = 0;
         function handleSubmit(e) {
-
-            
             e.preventDefault();
 
-            // Client-side rate limit: one submission per 30 seconds
             const now = Date.now();
             if (now - lastSubmit < 30000) return;
             lastSubmit = now;
@@ -1325,7 +1322,7 @@
                 phone: document.getElementById('phone').value,
                 date: document.getElementById('date').value,
                 eventType: document.getElementById('eventType').value,
-                website: document.getElementById('website').value  // honeypot
+                website: document.getElementById('website').value
             };
 
             fetch('/api/submit', {
@@ -1334,9 +1331,64 @@
                 body: JSON.stringify(data)
             }).catch(() => {});
 
+            // Fire new backend in parallel (non-blocking)
+            submitToNewBackend(collectFormData()).catch(() => {});
+
             document.getElementById('bookingForm').style.display = 'none';
             document.getElementById('formHeader').style.display = 'none';
             document.getElementById('successMsg').style.display = 'block';
+        }
+
+        // ── NEW BACKEND PIPELINE – Stage 1: collect + validate ───────────
+
+        function collectFormData() {
+            return {
+                name:        document.getElementById('name').value.trim(),
+                phone:       document.getElementById('phone').value.trim(),
+                date:        document.getElementById('date').value,
+                eventType:   document.getElementById('eventType').value,
+                terms:       document.getElementById('termsCheckbox').checked,
+                submittedAt: new Date().toISOString()
+            };
+        }
+
+        function validateBookingData(data) {
+            const errors = [];
+
+            if (!data.name || data.name.length < 2)
+                errors.push('שם מלא חייב להכיל לפחות 2 תווים');
+
+            const phoneClean = data.phone.replace(/[\s\-]/g, '');
+            if (!/^0[5][0-9]{8}$/.test(phoneClean))
+                errors.push('מספר טלפון לא תקין');
+
+            if (!data.date)
+                errors.push('יש לבחור תאריך');
+            else {
+                const chosen = new Date(data.date);
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                if (chosen <= today)
+                    errors.push('התאריך חייב להיות עתידי');
+            }
+
+            if (!data.eventType)
+                errors.push('יש לבחור סוג אירוע');
+
+            if (!data.terms)
+                errors.push('יש לאשר את תנאי השימוש');
+
+            return errors;
+        }
+
+        async function submitToNewBackend(data) {
+            const errors = validateBookingData(data);
+            if (errors.length > 0) {
+                console.warn('[NewBackend] Validation failed:', errors);
+                return;
+            }
+            // Stage 2: POST to new backend endpoint
+            console.log('[NewBackend] Stage 1 complete – data ready:', data);
         }
 
         // Set min date for date picker
