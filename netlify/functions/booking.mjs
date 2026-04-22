@@ -52,6 +52,8 @@ function log(level, message, meta = {}) {
 // ── Handler ───────────────────────────────────────────────────────────────────
 
 export default async (req) => {
+    log('info', 'Booking endpoint called');
+
     if (req.method !== 'POST') {
         return Response.json({ error: 'Method Not Allowed' }, { status: 405 });
     }
@@ -95,12 +97,12 @@ export default async (req) => {
     const calendarResult = results[1];
 
     if (emailResult.status === 'rejected')
-        log('error', 'Email service failed', { reason: emailResult.reason?.message });
+        log('error', 'Email service failed', { reason: emailResult.reason?.message, stack: emailResult.reason?.stack });
     else
         log('info', 'Email sent successfully');
 
     if (calendarResult.status === 'rejected')
-        log('error', 'Calendar service failed', { reason: calendarResult.reason?.message });
+        log('error', 'Calendar service failed', { reason: calendarResult.reason?.message, stack: calendarResult.reason?.stack });
     else
         log('info', 'Calendar event created');
 

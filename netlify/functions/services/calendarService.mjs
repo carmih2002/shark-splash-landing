@@ -21,7 +21,7 @@ export async function createCalendarEvent(booking) {
 
     const auth = new google.auth.JWT({
         email: serviceEmail,
-        key:   privateKey.replace(/\\n/g, '\n'),
+        key:   privateKey.replace(/\\n/g, '\n').replace(/\r/g, ''),
         scopes: ['https://www.googleapis.com/auth/calendar']
     });
 
