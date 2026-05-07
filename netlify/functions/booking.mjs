@@ -95,6 +95,8 @@ export default async (req) => {
         appendToSheet(booking)
     ]);
 
+    log('info', 'Services settled', { statuses: results.map(r => r.status), reasons: results.map(r => r.reason?.message ?? null) });
+
     const emailResult    = results[0];
     const calendarResult = results[1];
     const sheetsResult   = results[2];
