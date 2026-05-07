@@ -1,5 +1,6 @@
 import { sendBookingEmail } from './services/emailService.mjs';
 import { createCalendarEvent } from './services/calendarService.mjs';
+import { appendToSheet } from './services/sheetsService.mjs';
 
 // ── Validation ────────────────────────────────────────────────────────────────
 
@@ -90,11 +91,13 @@ export default async (req) => {
 
     const results = await Promise.allSettled([
         sendBookingEmail(booking),
-        createCalendarEvent(booking)
+        createCalendarEvent(booking),
+        appendToSheet(booking)
     ]);
 
-    const emailResult   = results[0];
+    const emailResult    = results[0];
     const calendarResult = results[1];
+    const sheetsResult   = results[2];
 
     if (emailResult.status === 'rejected')
         log('error', 'Email service failed', { reason: emailResult.reason?.message, stack: emailResult.reason?.stack });
@@ -105,6 +108,11 @@ export default async (req) => {
         log('error', 'Calendar service failed', { reason: calendarResult.reason?.message, stack: calendarResult.reason?.stack });
     else
         log('info', 'Calendar event created');
+
+    if (sheetsResult.status === 'rejected')
+        log('error', 'Sheets service failed', { reason: sheetsResult.reason?.message, stack: sheetsResult.reason?.stack });
+    else
+        log('info', 'Sheet row appended');
 
     // Return success even if secondary services failed – booking was received
     return Response.json({ ok: true }, { status: 200 });
