@@ -21,7 +21,7 @@ export async function appendToSheet(booking) {
 
     await sheets.spreadsheets.values.append({
         spreadsheetId,
-        range: 'Sheet1!A:B',
+        range: 'A:B',
         valueInputOption: 'USER_ENTERED',
         requestBody: {
             values: [[booking.name, booking.phone]]
